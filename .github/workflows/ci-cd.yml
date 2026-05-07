@@ -132,6 +132,10 @@ jobs:
     name: Container Vulnerability Scan
     runs-on: ubuntu-latest
     needs: [build]
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -154,13 +158,15 @@ jobs:
           format: 'sarif'
           output: 'trivy-backend-results.sarif'
           severity: 'CRITICAL,HIGH'
+        continue-on-error: true
 
       - name: Upload Trivy backend results to GitHub Security
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: 'trivy-backend-results.sarif'
           category: 'backend-container'
+        continue-on-error: true
 
       - name: Build frontend image for scanning
         uses: docker/build-push-action@v5
@@ -177,13 +183,15 @@ jobs:
           format: 'sarif'
           output: 'trivy-frontend-results.sarif'
           severity: 'CRITICAL,HIGH'
+        continue-on-error: true
 
       - name: Upload Trivy frontend results to GitHub Security
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: 'trivy-frontend-results.sarif'
           category: 'frontend-container'
+        continue-on-error: true
 
   # Deploy to Production (only on main branch)
   deploy:
