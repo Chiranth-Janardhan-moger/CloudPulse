@@ -1,0 +1,41 @@
+# Git
+.git
+.gitignore
+.github
+
+# Documentation
+*.md
+README.md
+LICENSE
+
+# Node modules
+node_modules
+npm-debug.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist
+build
+coverage
+
+# Test files
+tests
+*.test.js
+*.spec.js
+
+# CI/CD
+.github/workflows

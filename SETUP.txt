@@ -1,0 +1,83 @@
+Cloud Idle Instance Monitor - Setup Instructions
+
+=== QUICK START ===
+
+1. Configure Backend (Optional - can use UI login instead):
+   cd backend
+   copy .env.example .env
+   Edit .env and add your AWS credentials
+
+2. Start with Docker:
+   docker-compose up --build
+
+3. Access Application:
+   Open browser: http://localhost
+
+4. Login:
+   - Enter AWS Access Key ID
+   - Enter AWS Secret Access Key
+   - Select AWS Region (not used - all regions scanned automatically)
+   - Click "Connect to AWS"
+
+=== FEATURES ===
+
+- Login page for AWS credentials
+- **Multi-Region Support** - Automatically scans ALL AWS regions
+- Real-time EC2 instance monitoring across all regions
+- CPU utilization tracking
+- Idle instance detection (CPU < 5% for 7 days)
+- Cost waste estimation
+- One-click instance stop
+- **Advanced Filters:**
+  - Search by instance name or ID
+  - Filter by region
+  - Filter by state (running, stopped, etc.)
+- **Billing Dashboard:**
+  - Current month costs
+  - Last month costs
+  - Year-to-date costs
+  - Monthly breakdown chart
+- Auto-refresh every 30 seconds
+- Modern light theme UI
+- Instances grouped by region
+
+=== DEVELOPMENT MODE ===
+
+Backend:
+cd backend
+npm install
+npm start
+
+Frontend:
+cd frontend
+npm install
+npm run dev
+
+=== DOCKER COMMANDS ===
+
+Start: docker-compose up -d
+Stop: docker-compose down
+Logs: docker-compose logs -f
+Rebuild: docker-compose up --build
+
+=== PORTS ===
+
+Frontend: http://localhost (port 80)
+Backend: http://localhost:5000
+
+=== IAM PERMISSIONS REQUIRED ===
+
+Your AWS IAM user needs:
+- ec2:DescribeInstances (all regions)
+- ec2:StopInstances
+- cloudwatch:GetMetricStatistics
+- ce:GetCostAndUsage (for billing)
+
+See IAM_PERMISSIONS.txt for complete policy
+
+=== SECURITY ===
+
+Credentials are stored in browser localStorage
+Never committed to version control
+Only sent to AWS APIs via backend
+

@@ -1,0 +1,86 @@
+Build a full-stack real-time Cloud Idle Instance Monitor application using React, Node.js, Express, Docker, Docker Compose, and AWS SDK v3.
+
+The application should connect to AWS EC2 and CloudWatch services using AWS credentials stored in environment variables.
+
+Features required:
+
+* Fetch all EC2 instances
+* Display instance details:
+
+  * instance name
+  * instance ID
+  * instance type
+  * instance state
+  * launch time
+* Fetch CPUUtilization metrics from CloudWatch
+* Detect idle instances where CPU usage is below 5% for the last 7 days
+* Show estimated monthly cost waste for idle instances
+* Add a button to stop EC2 instances directly from the dashboard
+* Create backend APIs for:
+
+  * fetching instances
+  * fetching metrics
+  * stopping instances
+* Handle invalid AWS credentials and API errors properly
+* Build a clean dashboard UI
+* Add status colors:
+
+  * green for running
+  * yellow for idle
+  * red for stopped
+* Add loading states and error states
+* Add charts for:
+
+  * CPU usage
+  * idle percentage
+  * estimated cost waste
+* Auto refresh dashboard every 30 seconds
+
+Docker requirements:
+
+* Dockerize frontend
+* Dockerize backend
+* Create docker-compose.yml
+* Run frontend and backend containers together
+
+Tech stack:
+Frontend:
+
+* React
+* Axios
+* Recharts
+* Tailwind CSS
+
+Backend:
+
+* Node.js
+* Express
+* AWS SDK v3
+* dotenv
+* cors
+
+DevOps:
+
+* Docker
+* Docker Compose
+
+Requirements:
+
+* Use clean folder structure
+* Use reusable React components
+* Use REST APIs
+* Use environment variables
+* Add proper comments in code
+* Generate complete working code
+* Generate all required files
+* Generate Dockerfiles
+* Generate docker-compose.yml
+* Generate README.md with setup instructions
+
+Do not use fake data or mock APIs.
+Use real AWS integration only.
+
+for ui refer https://www.remotion.dev/
+
+create a futuistic dashbord 
+with easy usgae and easy undertandabilty for users 
