@@ -1,0 +1,186 @@
+=== CloudPulse Deployment Guide ===
+
+## Quick Start (Production)
+
+Run the pre-built application with one command:
+
+```bash
+docker-compose up -d
+```
+
+This will:
+- Pull pre-built images from GitHub Container Registry
+- Start backend on port 5000
+- Start frontend on port 80
+- Set up networking between services
+- Enable health checks
+- Auto-restart on failure
+
+Access the application at: http://localhost
+
+## Stop the Application
+
+```bash
+docker-compose down
+```
+
+## View Logs
+
+```bash
+# All services
+docker-compose logs -f
+
+# Backend only
+docker-compose logs -f backend
+
+# Frontend only
+docker-compose logs -f frontend
+```
+
+## Development Mode
+
+For local development with live code changes:
+
+```bash
+docker-compose -f docker-compose.dev.yml up --build
+```
+
+This will:
+- Build images from local source code
+- Mount volumes for live reloading
+- Use environment variables from .env files
+
+## Update to Latest Version
+
+```bash
+# Pull latest images
+docker-compose pull
+
+# Restart services
+docker-compose up -d
+```
+
+## Environment Configuration
+
+The application uses AWS credentials provided through the UI login page.
+No environment variables are required for basic operation.
+
+For backend environment variables (optional):
+1. Copy backend/.env.example to backend/.env
+2. Add your AWS credentials (optional - can use UI instead)
+
+## Health Checks
+
+The application includes health checks:
+- Backend: http://localhost:5000/api/health
+- Frontend: http://localhost:80
+
+Docker will automatically restart unhealthy containers.
+
+## Troubleshooting
+
+### Port Already in Use
+If port 80 or 5000 is already in use, modify docker-compose.yml:
+```yaml
+ports:
+  - "8080:80"  # Change frontend port
+  - "5001:5000"  # Change backend port
+```
+
+### Cannot Pull Images
+If you get permission errors pulling images:
+```bash
+# Login to GitHub Container Registry
+echo $GITHUB_TOKEN | docker login ghcr.io -u USERNAME --password-stdin
+
+# Or use docker-compose.dev.yml to build locally
+docker-compose -f docker-compose.dev.yml up --build
+```
+
+### Backend Connection Issues
+Check backend logs:
+```bash
+docker-compose logs backend
+```
+
+Ensure backend is healthy:
+```bash
+docker-compose ps
+```
+
+### Frontend Not Loading
+1. Check if backend is running: `docker-compose ps`
+2. Check frontend logs: `docker-compose logs frontend`
+3. Verify port 80 is accessible: `curl http://localhost`
+
+## Production Deployment
+
+For production deployment:
+
+1. **Update Image Tags**
+   Edit docker-compose.yml to use latest stable tag:
+   ```yaml
+   image: ghcr.io/chiranth-janardhan-moger/cloudpulse/backend:latest
+   ```
+
+2. **Use HTTPS**
+   Add a reverse proxy (nginx/traefik) with SSL certificates
+
+3. **Set Resource Limits**
+   Add to docker-compose.yml:
+   ```yaml
+   deploy:
+     resources:
+       limits:
+         cpus: '1'
+         memory: 1G
+   ```
+
+4. **Enable Monitoring**
+   Add Prometheus/Grafana for monitoring
+
+5. **Backup Strategy**
+   Profiles are stored in browser localStorage
+   No database backup needed
+
+## Architecture
+
+```
+┌─────────────┐
+│   Browser   │
+│  (Port 80)  │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Frontend   │
+│   (Nginx)   │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│   Backend   │
+│  (Node.js)  │
+│  Port 5000  │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  AWS APIs   │
+│ EC2/CloudWatch
+│ Cost Explorer│
+└─────────────┘
+```
+
+## Support
+
+For issues:
+1. Check logs: `docker-compose logs`
+2. Verify health: `docker-compose ps`
+3. Restart services: `docker-compose restart`
+4. Full reset: `docker-compose down && docker-compose up -d`
+
+## Version Information
+
+Current Version: main-dac8e92
+Registry: ghcr.io/chiranth-janardhan-moger/cloudpulse
