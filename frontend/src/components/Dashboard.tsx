@@ -47,7 +47,6 @@ const Dashboard = ({
   onRefresh,
   onStopInstance,
   onLogout,
-  credentials,
   onShowBilling,
   username,
 }: DashboardProps) => {
