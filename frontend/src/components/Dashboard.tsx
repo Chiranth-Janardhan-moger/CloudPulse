@@ -36,6 +36,7 @@ interface DashboardProps {
     region: string;
   };
   onShowBilling: () => void;
+  username: string;
 }
 
 const Dashboard = ({
@@ -48,6 +49,7 @@ const Dashboard = ({
   onLogout,
   credentials,
   onShowBilling,
+  username,
 }: DashboardProps) => {
   const [selectedRegion, setSelectedRegion] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -132,7 +134,10 @@ const Dashboard = ({
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">Cloud Instance Monitor</h1>
-                <p className="text-sm text-gray-500">Monitoring <span className="font-semibold text-blue-600">{instances.length}</span> instances across <span className="font-semibold text-blue-600">{regions.length - 1}</span> regions</p>
+                <p className="text-sm text-gray-500">
+                  Welcome, <span className="font-semibold text-blue-600">{username}</span> • 
+                  Monitoring <span className="font-semibold text-blue-600">{instances.length}</span> instances across <span className="font-semibold text-blue-600">{regions.length - 1}</span> regions
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-3">

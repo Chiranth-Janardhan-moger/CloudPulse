@@ -3,6 +3,7 @@ import axios from 'axios';
 import Dashboard from './components/Dashboard';
 import LoginPage from './components/LoginPage';
 import BillingPage from './components/BillingPage';
+import ProfileManager from './components/ProfileManager';
 import './App.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -23,21 +24,24 @@ interface Instance {
 }
 
 interface AWSCredentials {
+  username: string;
   accessKeyId: string;
   secretAccessKey: string;
   region: string;
 }
 
+type ViewMode = 'login' | 'profiles' | 'dashboard' | 'billing';
+
 function App() {
+  const [viewMode, setViewMode] = useState<ViewMode>('login');
   const [credentials, setCredentials] = useState<AWSCredentials | null>(() => {
-    const saved = localStorage.getItem('awsCredentials');
+    const saved = localStorage.getItem('currentAwsCredentials');
     return saved ? JSON.parse(saved) : null;
   });
   const [instances, setInstances] = useState<Instance[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
-  const [showBilling, setShowBilling] = useState(false);
 
   const fetchInstances = async () => {
     if (!credentials) {
@@ -140,18 +144,30 @@ function App() {
 
   const handleLogin = (creds: AWSCredentials) => {
     setCredentials(creds);
-    localStorage.setItem('awsCredentials', JSON.stringify(creds));
+    localStorage.setItem('currentAwsCredentials', JSON.stringify(creds));
+    setViewMode('dashboard');
     setLoading(true);
   };
 
   const handleLogout = () => {
     setCredentials(null);
-    localStorage.removeItem('awsCredentials');
+    localStorage.removeItem('currentAwsCredentials');
     setInstances([]);
+    setViewMode('login');
+  };
+
+  const handleSelectProfile = (profile: any) => {
+    const creds = {
+      username: profile.username,
+      accessKeyId: profile.accessKeyId,
+      secretAccessKey: profile.secretAccessKey,
+      region: profile.region,
+    };
+    handleLogin(creds);
   };
 
   useEffect(() => {
-    if (credentials) {
+    if (credentials && viewMode === 'dashboard') {
       fetchInstances();
 
       const interval = setInterval(() => {
@@ -160,15 +176,28 @@ function App() {
 
       return () => clearInterval(interval);
     }
-  }, [credentials]);
+  }, [credentials, viewMode]);
 
-  return credentials ? (
-    showBilling ? (
-      <BillingPage 
-        credentials={credentials}
-        onBack={() => setShowBilling(false)}
+  if (viewMode === 'profiles') {
+    return (
+      <ProfileManager
+        onSelectProfile={handleSelectProfile}
+        onBack={() => setViewMode('login')}
       />
-    ) : (
+    );
+  }
+
+  if (viewMode === 'billing' && credentials) {
+    return (
+      <BillingPage
+        credentials={credentials}
+        onBack={() => setViewMode('dashboard')}
+      />
+    );
+  }
+
+  if (viewMode === 'dashboard' && credentials) {
+    return (
       <Dashboard
         instances={instances}
         loading={loading}
@@ -179,11 +208,17 @@ function App() {
         onLogout={handleLogout}
         region={credentials.region}
         credentials={credentials}
-        onShowBilling={() => setShowBilling(true)}
+        onShowBilling={() => setViewMode('billing')}
+        username={credentials.username}
       />
-    )
-  ) : (
-    <LoginPage onLogin={handleLogin} />
+    );
+  }
+
+  return (
+    <LoginPage
+      onLogin={handleLogin}
+      onManageProfiles={() => setViewMode('profiles')}
+    />
   );
 }
 

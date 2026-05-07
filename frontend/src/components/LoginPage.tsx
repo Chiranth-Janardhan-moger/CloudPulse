@@ -2,13 +2,16 @@ import { useState } from 'react';
 
 interface LoginPageProps {
   onLogin: (credentials: {
+    username: string;
     accessKeyId: string;
     secretAccessKey: string;
     region: string;
   }) => void;
+  onManageProfiles: () => void;
 }
 
-const LoginPage = ({ onLogin }: LoginPageProps) => {
+const LoginPage = ({ onLogin, onManageProfiles }: LoginPageProps) => {
+  const [username, setUsername] = useState('');
   const [accessKeyId, setAccessKeyId] = useState('');
   const [secretAccessKey, setSecretAccessKey] = useState('');
   const [region, setRegion] = useState('us-east-1');
@@ -16,8 +19,8 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (accessKeyId && secretAccessKey && region) {
-      onLogin({ accessKeyId, secretAccessKey, region });
+    if (username && accessKeyId && secretAccessKey && region) {
+      onLogin({ username, accessKeyId, secretAccessKey, region });
     }
   };
 
@@ -68,6 +71,21 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
 
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="username" className="block text-sm font-semibold text-gray-700 mb-2">
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                placeholder="John Doe"
+                required
+              />
+            </div>
+
             <div>
               <label htmlFor="accessKeyId" className="block text-sm font-semibold text-gray-700 mb-2">
                 AWS Access Key ID
@@ -140,6 +158,17 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
               className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
               Connect to AWS
+            </button>
+
+            <button
+              type="button"
+              onClick={onManageProfiles}
+              className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-6 rounded-xl font-semibold transition-all flex items-center justify-center gap-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              Manage Profiles
             </button>
           </form>
 
