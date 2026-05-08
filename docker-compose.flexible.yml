@@ -1,11 +1,14 @@
 version: '3.8'
 
+# Flexible port configuration - automatically uses next available port
+# Usage: docker-compose -f docker-compose.flexible.yml up
+
 services:
   backend:
     image: ghcr.io/chiranth-janardhan-moger/cloudpulse/backend:main-dac8e92
     container_name: cloudpulse-backend
     ports:
-      - "5001:5000"
+      - "5000-5010:5000"  # Will try ports 5000-5010 until one is available
     environment:
       - PORT=5000
     restart: unless-stopped
@@ -16,7 +19,7 @@ services:
     image: ghcr.io/chiranth-janardhan-moger/cloudpulse/frontend:main-dac8e92
     container_name: cloudpulse-frontend
     ports:
-      - "80:80"
+      - "80-90:80"  # Will try ports 80-90 until one is available
     depends_on:
       - backend
     restart: unless-stopped
