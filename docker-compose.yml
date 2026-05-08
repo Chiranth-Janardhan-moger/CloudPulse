@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: ghcr.io/chiranth-janardhan-moger/cloudpulse/backend:main-dac8e92
+    image: ghcr.io/chiranth-janardhan-moger/cloudpulse/backend:main-d2eaa00
     container_name: cloudpulse-backend
     ports:
       - "5001:5000"
@@ -13,7 +13,7 @@ services:
       - cloudpulse-network
 
   frontend:
-    image: ghcr.io/chiranth-janardhan-moger/cloudpulse/frontend:main-dac8e92
+    image: ghcr.io/chiranth-janardhan-moger/cloudpulse/frontend:main-d2eaa00
     container_name: cloudpulse-frontend
     ports:
       - "80:80"
