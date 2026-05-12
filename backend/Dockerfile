@@ -2,6 +2,9 @@ FROM node:22-alpine
 
 WORKDIR /app
 
+# Update packages to fix security vulnerabilities
+RUN apk update && apk upgrade --no-cache
+
 COPY package*.json ./
 
 RUN npm install
