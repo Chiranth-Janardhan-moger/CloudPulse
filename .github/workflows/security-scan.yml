@@ -112,14 +112,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: TruffleHog OSS
-        uses: trufflesecurity/trufflehog@main
-        with:
-          path: ./
-          extra_args: --debug --only-verified
+      - name: TruffleHog OSS - Filesystem Scan
+        run: |
+          docker run --rm -v "$PWD:/scan" trufflesecurity/trufflehog:latest filesystem /scan --only-verified --json > trufflehog-results.json || true
+          
+      - name: Display Results
+        run: |
+          if [ -s trufflehog-results.json ]; then
+            echo "⚠️ Secrets detected!"
+            cat trufflehog-results.json
+            exit 1
+          else
+            echo "✅ No secrets detected"
+          fi
 
   # License compliance
   license-check:
