@@ -31,3 +31,5 @@ Thumbs.db
 *.pid
 *.seed
 *.pid.lock
+# Documentation and notes (exclude .txt files)
+*.txt
