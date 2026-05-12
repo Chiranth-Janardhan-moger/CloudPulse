@@ -226,21 +226,21 @@ npm test
                      │ HTTP/REST
                      ▼
 ┌─────────────────────────────────────────────────┐
-│              Frontend (Nginx)                    │
-│         Serves static React build                │
+│              Frontend (Nginx)                   │
+│         Serves static React build               │
 └────────────────────┬────────────────────────────┘
                      │ Proxy /api
                      ▼
 ┌─────────────────────────────────────────────────┐
-│          Backend (Node.js/Express)               │
-│    - EC2 Instance Management                     │
-│    - CloudWatch Metrics                          │
-│    - Cost Explorer Integration                   │
+│          Backend (Node.js/Express)              │
+│    - EC2 Instance Management                    │
+│    - CloudWatch Metrics                         │
+│    - Cost Explorer Integration                  │
 └────────────────────┬────────────────────────────┘
                      │ AWS SDK v3
                      ▼
 ┌─────────────────────────────────────────────────┐
-│                 AWS Services                     │
+│                 AWS Services                    │
 │  • EC2  • CloudWatch  • Cost Explorer           │
 └─────────────────────────────────────────────────┘
 ```
