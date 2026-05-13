@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard';
 import LoginPage from './components/LoginPage';
 import BillingPage from './components/BillingPage';
 import ProfileManager from './components/ProfileManager';
+import { secureStore, secureRetrieve, secureRemove } from './utils/crypto';
 import './App.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -35,8 +36,8 @@ type ViewMode = 'login' | 'profiles' | 'dashboard' | 'billing';
 function App() {
   const [viewMode, setViewMode] = useState<ViewMode>('login');
   const [credentials, setCredentials] = useState<AWSCredentials | null>(() => {
-    const saved = localStorage.getItem('currentAwsCredentials');
-    return saved ? JSON.parse(saved) : null;
+    // Use secure encrypted session storage instead of plain localStorage
+    return secureRetrieve('currentAwsCredentials');
   });
   const [instances, setInstances] = useState<Instance[]>([]);
   const [loading, setLoading] = useState(true);
@@ -144,14 +145,16 @@ function App() {
 
   const handleLogin = (creds: AWSCredentials) => {
     setCredentials(creds);
-    localStorage.setItem('currentAwsCredentials', JSON.stringify(creds));
+    // Store credentials encrypted in sessionStorage (cleared on browser close)
+    secureStore('currentAwsCredentials', creds);
     setViewMode('dashboard');
     setLoading(true);
   };
 
   const handleLogout = () => {
     setCredentials(null);
-    localStorage.removeItem('currentAwsCredentials');
+    // Remove encrypted credentials from sessionStorage
+    secureRemove('currentAwsCredentials');
     setInstances([]);
     setViewMode('login');
   };

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { secureStore, secureRetrieve } from '../utils/crypto';
 
 interface AWSProfile {
   id: string;
@@ -17,8 +18,8 @@ interface ProfileManagerProps {
 
 const ProfileManager = ({ onSelectProfile, onBack }: ProfileManagerProps) => {
   const [profiles, setProfiles] = useState<AWSProfile[]>(() => {
-    const saved = localStorage.getItem('awsProfiles');
-    return saved ? JSON.parse(saved) : [];
+    // Use secure encrypted storage instead of plain localStorage
+    return secureRetrieve('awsProfiles') || [];
   });
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingProfile, setEditingProfile] = useState<AWSProfile | null>(null);
@@ -54,7 +55,7 @@ const ProfileManager = ({ onSelectProfile, onBack }: ProfileManagerProps) => {
           : p
       );
       setProfiles(updated);
-      localStorage.setItem('awsProfiles', JSON.stringify(updated));
+      secureStore('awsProfiles', updated);
     } else {
       const newProfile: AWSProfile = {
         id: Date.now().toString(),
@@ -63,7 +64,7 @@ const ProfileManager = ({ onSelectProfile, onBack }: ProfileManagerProps) => {
       };
       const updated = [...profiles, newProfile];
       setProfiles(updated);
-      localStorage.setItem('awsProfiles', JSON.stringify(updated));
+      secureStore('awsProfiles', updated);
     }
 
     setShowAddForm(false);
@@ -81,7 +82,7 @@ const ProfileManager = ({ onSelectProfile, onBack }: ProfileManagerProps) => {
     if (confirm('Are you sure you want to delete this profile?')) {
       const updated = profiles.filter(p => p.id !== id);
       setProfiles(updated);
-      localStorage.setItem('awsProfiles', JSON.stringify(updated));
+      secureStore('awsProfiles', updated);
     }
   };
 
