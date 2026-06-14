@@ -1,0 +1,11 @@
+# picomatch: Regular Expression Denial of Service via crafted extglob patterns
+CVE-2026-33671
+
+# picomatch: Data integrity compromised via method injection with crafted POSIX bracket expressions
+CVE-2026-33672
+
+# ip-address: Cross-Site Scripting (XSS) via HTML-emitting methods
+CVE-2026-42338
+
+# brace-expansion: Denial of Service via zero step value in brace pattern
+CVE-2026-33750
