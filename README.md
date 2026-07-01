@@ -1,6 +1,6 @@
 <div align="center">
 
-# ☁️ CloudPulse
+# ️ CloudPulse
 
 ### Real-Time AWS EC2 Instance Monitor & Cost Optimizer
 
@@ -17,42 +17,42 @@
 
 ---
 
-## 🎯 Overview
+##  Overview
 
 CloudPulse is a comprehensive AWS monitoring solution that helps you visualize, manage, and optimize your EC2 infrastructure across all AWS regions. With real-time metrics, idle instance detection, and cost analysis, CloudPulse makes cloud management effortless.
 
-## ✨ Features
+##  Features
 
-### 🌍 Multi-Region Monitoring
+###  Multi-Region Monitoring
 - **Automatic scanning** across all enabled AWS regions
 - **Real-time instance discovery** with auto-refresh every 30 seconds
 - **Unified dashboard** showing instances from all regions
 
-### 💰 Cost Optimization
+###  Cost Optimization
 - **Idle instance detection** (CPU < 5% for 7 days)
 - **Cost waste estimation** for idle resources
 - **AWS billing dashboard** with monthly/yearly breakdowns
 - **Visual cost analytics** with interactive charts
 
-### 👥 Multi-Account Management
+###  Multi-Account Management
 - **Profile system** for managing multiple AWS accounts
 - **Quick switching** between different accounts
 - **Secure credential storage** in browser localStorage
 - **User-friendly login** with username support
 
-### 📊 Advanced Analytics
+###  Advanced Analytics
 - **CPU utilization tracking** via CloudWatch
 - **Instance status visualization** with color coding
 - **Interactive charts** for cost and usage trends
 - **Detailed instance information** (type, IPs, launch time)
 
-### 🔧 Instance Management
+###  Instance Management
 - **One-click instance stop** directly from dashboard
 - **Advanced filtering** by region, state, and search
 - **Bulk operations** support
 - **Real-time status updates**
 
-### 🔒 Security & DevOps
+###  Security & DevOps
 - **Automated CI/CD pipeline** with GitHub Actions
 - **Container vulnerability scanning** (Trivy, Grype)
 - **Dependency security checks** (npm audit, Snyk)
@@ -60,7 +60,7 @@ CloudPulse is a comprehensive AWS monitoring solution that helps you visualize, 
 - **Secret detection** with TruffleHog
 - **Automated dependency updates** via Dependabot
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Docker & Docker Compose
@@ -76,13 +76,13 @@ docker-compose up -d
 That's it! Access the application at **http://localhost**
 
 ### What Happens?
-1. ✅ Pulls pre-built images from GitHub Container Registry
-2. ✅ Starts backend API server (port 5000)
-3. ✅ Starts frontend web app (port 80)
-4. ✅ Sets up networking and health checks
-5. ✅ Auto-restarts on failure
+1.  Pulls pre-built images from GitHub Container Registry
+2.  Starts backend API server (port 5000)
+3.  Starts frontend web app (port 80)
+4.  Sets up networking and health checks
+5.  Auto-restarts on failure
 
-## 📸 Demo
+##  Demo
 
 ### Dashboard
 ![Dashboard](https://via.placeholder.com/800x400/4F46E5/FFFFFF?text=CloudPulse+Dashboard)
@@ -93,7 +93,7 @@ That's it! Access the application at **http://localhost**
 ### Profile Manager
 ![Profiles](https://via.placeholder.com/800x400/F59E0B/FFFFFF?text=Profile+Manager)
 
-## 🛠️ Tech Stack
+## ️ Tech Stack
 
 ### Frontend
 - **React 19** - Modern UI framework
@@ -126,7 +126,7 @@ That's it! Access the application at **http://localhost**
 - **Snyk** - Dependency security
 - **TruffleHog** - Secret detection
 
-## 📋 IAM Permissions Required
+##  IAM Permissions Required
 
 Your AWS IAM user needs these permissions:
 
@@ -150,13 +150,13 @@ Your AWS IAM user needs these permissions:
 
 See [IAM_PERMISSIONS.txt](IAM_PERMISSIONS.txt) for detailed setup.
 
-## 📖 Documentation
+##  Documentation
 
 - **[DEPLOYMENT.txt](DEPLOYMENT.txt)** - Deployment guide and troubleshooting
 - **[DEVOPS.md](DEVOPS.md)** - CI/CD pipeline and security documentation
 - **[SETUP.txt](SETUP.txt)** - Development setup instructions
 
-## 🎮 Usage
+##  Usage
 
 ### 1. Login
 - Enter your username
@@ -182,7 +182,7 @@ See [IAM_PERMISSIONS.txt](IAM_PERMISSIONS.txt) for detailed setup.
 - Analyze monthly trends with charts
 - Export data for reporting
 
-## 🔧 Development
+##  Development
 
 ### Local Development
 
@@ -216,7 +216,7 @@ cd frontend
 npm test
 ```
 
-## 🏗️ Architecture
+## ️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -245,17 +245,17 @@ npm test
 └─────────────────────────────────────────────────┘
 ```
 
-## 🔐 Security
+##  Security
 
-- ✅ Credentials stored locally in browser
-- ✅ HTTPS recommended for production
-- ✅ No credentials stored on server
-- ✅ Automated security scanning in CI/CD
-- ✅ Container vulnerability checks
-- ✅ Dependency auditing
-- ✅ Secret detection in commits
+-  Credentials stored locally in browser
+-  HTTPS recommended for production
+-  No credentials stored on server
+-  Automated security scanning in CI/CD
+-  Container vulnerability checks
+-  Dependency auditing
+-  Secret detection in commits
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -271,11 +271,11 @@ Contributions are welcome! Please follow these steps:
 - Update documentation
 - Ensure CI/CD passes
 
-## 📝 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - AWS SDK team for excellent documentation
 - React and TypeScript communities
@@ -283,13 +283,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - GitHub Actions for CI/CD
 - All open-source contributors
 
-## 📞 Support
+##  Support
 
-- 📧 Email: support@cloudpulse.dev
-- 🐛 Issues: [GitHub Issues](https://github.com/chiranth-janardhan-moger/cloudpulse/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/chiranth-janardhan-moger/cloudpulse/discussions)
+-  Email: support@cloudpulse.dev
+-  Issues: [GitHub Issues](https://github.com/chiranth-janardhan-moger/cloudpulse/issues)
+-  Discussions: [GitHub Discussions](https://github.com/chiranth-janardhan-moger/cloudpulse/discussions)
 
-## 🗺️ Roadmap
+## ️ Roadmap
 
 - [ ] Support for other cloud providers (Azure, GCP)
 - [ ] Advanced cost forecasting with ML
@@ -300,16 +300,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [ ] Mobile app (iOS/Android)
 - [ ] Multi-user collaboration features
 
-## ⭐ Star History
+##  Star History
 
-If you find CloudPulse useful, please consider giving it a star! ⭐
+If you find CloudPulse useful, please consider giving it a star! 
 
 ---
 
 <div align="center">
 
-**Built with ❤️ by [Chiranth Janardhan Moger](https://github.com/chiranth-janardhan-moger)**
+**Built with ️ by [Chiranth Janardhan Moger](https://github.com/chiranth-janardhan-moger)**
 
-[⬆ Back to Top](#️-cloudpulse)
+[ Back to Top](#️-cloudpulse)
 
 </div>
