@@ -315,4 +315,4 @@ If you find CloudPulse useful, please consider giving it a star!
 </div>
 
 <!-- Visitor Radar Telemetry -->
-<img src="https://chiranthmoger.vercel.app/api/telemetry/pixel.svg?target=CloudPulse%20Repository" width="1" height="1" alt="" style="display:none;" />
+<img src="https://chiranth.vercel.app/api/telemetry/pixel.svg?target=CloudPulse%20Repository" width="1" height="1" alt="" style="display:none;" />
